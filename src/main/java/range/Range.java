@@ -1,38 +1,141 @@
-/*
- * Author: LeDinhQuang
- */
 package range;
 
-public class Range {
-    private final int lowerbound;
-    private final int upperbound;
+/**
+ * Range.java
+ * 
+ * @author QuangLeDinh
+ *
+ */
+public class Range<T extends Comparable<T>> {
+    
+    // Indicates type of Range
+    public enum TypeRange {OPEN,CLOSE,OPEN_CLOSE,CLOSE_OPEN};
+    
+    private final T lowerbound;
+    private final T upperbound;
+    private final TypeRange typeRange;
 
-    public Range(int lowerbound, int upperbound) {
+    /**
+     * Create Range instance
+     * 
+     * @param lowerbound
+     * @param upperbound
+     * @param typeRange
+     */
+    public Range(T lowerbound, T upperbound, TypeRange typeRange) {
+        if (lowerbound.compareTo(upperbound) > 0) {
+            throw new IllegalArgumentException("wrong order, lowerbound > upperbound");
+        }
         this.lowerbound = lowerbound;
         this.upperbound = upperbound;
+        this.typeRange = typeRange;
+    }
+    
+    /**
+     * Check bigger value
+     * 
+     * @param start
+     * @param end
+     * @return true/false
+     */
+    public boolean isBigger(T start, T end) {
+        return start.compareTo(end) > 0;
     }
 
-    public static Range of(int min, int max) {
-        return (min > max) ? null : new Range(min, max);
+    /**
+     * Check smaller value
+     * 
+     * @param start
+     * @param end
+     * @return true/false
+     */
+    public boolean isSmaller(T start, T end) {
+        return start.compareTo(end) < 0;
     }
 
-    public static Range open(int min, int max) {
-        return (min > max) ? null : new Range(min++, max--);
+    /**
+     * 
+     * @param <T>
+     * @param min
+     * @param max
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static <T extends Comparable<T>> Range of(T min, T max) {
+        return new Range(min, max, TypeRange.CLOSE);
     }
 
-    public static Range close(int min, int max) {
-        return (min > max) ? null : new Range(min, max);
+    /**
+     * Create a Range instance with type is Open
+     * 
+     * @param <T>
+     * @param min
+     * @param max
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static <T extends Comparable<T>> Range open(T min, T max) {
+        return new Range(min, max, TypeRange.OPEN);
     }
 
-    public static Range openClose(int min, int max) {
-        return (min > max) ? null : new Range(min++, max);
+    /**
+     * Create a Range instance with type is Close
+     * 
+     * @param <T>
+     * @param min
+     * @param max
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static <T extends Comparable<T>> Range close(T min, T max) {
+        return new Range(min, max, TypeRange.CLOSE);
+    }
+    
+    /**
+     * Create a Range instance with type is Open_Close
+     * 
+     * @param <T>
+     * @param min
+     * @param max
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static <T extends Comparable<T>> Range openClose(T min, T max) {
+        return new Range(min, max, TypeRange.OPEN_CLOSE);
     }
 
-    public static Range closeOpen(int min, int max) {
-        return (min > max) ? null : new Range(min, max++);
+    /**
+     * Create a Range instance with type is Close_Open
+     * 
+     * @param <T>
+     * @param min
+     * @param max
+     * @return
+     */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public static <T extends Comparable<T>> Range closeOpen(T min, T max) {
+        return new Range(min, max, TypeRange.CLOSE_OPEN);
     }
 
-    public boolean constains(int num) {
-        return (num >= this.lowerbound) && (num <= this.upperbound);
+    /**
+     * Check value contain inside Range
+     * 
+     * @param value
+     * @return
+     */
+    public boolean contains(T value) {
+        // Check contain by Range type
+        switch (this.typeRange) {
+        case OPEN:
+            return (isBigger(value, this.lowerbound) && isSmaller(value, this.upperbound));
+        case CLOSE:
+            return (!isBigger(this.lowerbound, value) && !isBigger(value, this.upperbound));
+        case OPEN_CLOSE:
+            return (isBigger(value, this.lowerbound) && !isBigger(value, this.upperbound));
+        case CLOSE_OPEN:
+            return (!isBigger(this.lowerbound, value) && isBigger(this.upperbound, value));
+        default:
+            return false;
+        }
     }
 }
