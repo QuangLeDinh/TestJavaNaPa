@@ -1,7 +1,7 @@
 package range;
 
 /**
- * Range.java
+ * Clss Range to present a range of elements
  * 
  * @author QuangLeDinh
  *
