@@ -178,7 +178,7 @@ public class RangeTest extends TestCase {
 
     /**
      * REQUIRE 3
-     * Case1: Check data contain in Range with String data type (test lower bound)
+     * Case2: Check data contain in Range with String data type (test lower bound)
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
@@ -189,7 +189,7 @@ public class RangeTest extends TestCase {
 
     /**
      * REQUIRE 3
-     * Case1: Check data contain in Range with String data type (test upper bound)
+     * Case3: Check data contain in Range with String data type (test upper bound)
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
@@ -200,7 +200,7 @@ public class RangeTest extends TestCase {
 
     /**
      * REQUIRE 3
-     * Case1: Check data contain in Range with BigDecimal data type (normal)
+     * Case4: Check data contain in Range with BigDecimal data type (normal)
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
@@ -211,7 +211,7 @@ public class RangeTest extends TestCase {
 
     /**
      * REQUIRE 3
-     * Case1: Check data contain in Range with BigDecimal data type (test lower bound)
+     * Case5: Check data contain in Range with BigDecimal data type (test lower bound)
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
@@ -222,7 +222,7 @@ public class RangeTest extends TestCase {
 
     /**
      * REQUIRE 3
-     * Case1: Check data contain in Range with BigDecimal data type (test upper bound)
+     * Case6: Check data contain in Range with BigDecimal data type (test upper bound)
      */
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test

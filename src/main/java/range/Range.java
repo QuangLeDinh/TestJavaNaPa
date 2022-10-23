@@ -7,7 +7,7 @@ package range;
  *
  */
 public class Range<T extends Comparable<T>> {
-    
+
     // Indicates type of Range
     public enum TypeRange {OPEN,CLOSE,OPEN_CLOSE,CLOSE_OPEN};
     
@@ -30,7 +30,7 @@ public class Range<T extends Comparable<T>> {
         this.upperbound = upperbound;
         this.typeRange = typeRange;
     }
-    
+
     /**
      * Check bigger value
      * 
@@ -54,6 +54,7 @@ public class Range<T extends Comparable<T>> {
     }
 
     /**
+     * Create a new Range instance
      * 
      * @param <T>
      * @param min
@@ -90,7 +91,7 @@ public class Range<T extends Comparable<T>> {
     public static <T extends Comparable<T>> Range close(T min, T max) {
         return new Range(min, max, TypeRange.CLOSE);
     }
-    
+
     /**
      * Create a Range instance with type is Open_Close
      * 
