@@ -6,7 +6,7 @@ package range;
  * @author QuangLeDinh
  *
  */
-public class Range<T extends Comparable<T>> {
+public final class Range<T extends Comparable<T>> {
 
     // Indicates type of Range
     public enum TypeRange {OPEN,CLOSE,OPEN_CLOSE,CLOSE_OPEN};
